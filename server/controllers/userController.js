@@ -92,3 +92,9 @@ export const createUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid User Data");
   }
 });
+
+// Get All Users => Admin Only
+export const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+});

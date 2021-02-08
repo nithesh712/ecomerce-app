@@ -32,7 +32,7 @@ const UserEditScreen = ({ match, history }) => {
       dispatch({ type: USERS_UPDATE_RESET });
       history.push("/admin/userlist");
     } else {
-      if (!user.name || user._id !== userId) {
+      if (user && (!user.name || user._id !== userId)) {
         dispatch(getUserDetails(userId));
       } else {
         setName(user.name);

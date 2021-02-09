@@ -4,6 +4,7 @@ dotenv.config();
 import path from "path";
 import express from "express";
 import connectDB from "./config/db.js";
+import morgan from "morgan";
 import { notFound, errorHandler } from "./middleware/error.js";
 
 import productRoutes from "./routes/productRoutes.js";
@@ -12,6 +13,9 @@ import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 
 const app = express();
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 connectDB();
 

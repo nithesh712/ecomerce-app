@@ -8,6 +8,7 @@ import {
   updateProduct,
   createProduct,
   createProductReview,
+  getTopProducts,
 } from "../controllers/productController.js";
 
 // Get All Products
@@ -21,5 +22,6 @@ router.delete("/:id", protect, admin, deleteProduct);
 router.put("/:id", protect, admin, updateProduct);
 router.post("/", protect, admin, createProduct);
 router.post("/:id/reviews", protect, createProductReview);
+router.get("/top/products", getTopProducts);
 
 export default router;

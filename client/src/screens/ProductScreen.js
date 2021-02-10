@@ -18,6 +18,7 @@ import {
   createProductReview,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
+import Meta from "../components/Meta";
 
 const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(1);
@@ -66,6 +67,7 @@ const ProductScreen = ({ match, history }) => {
 
   return (
     <>
+      <Meta title={product.name} />
       <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>

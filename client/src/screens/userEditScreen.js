@@ -6,7 +6,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
 import { getUserDetails, updateUser } from "../actions/userActions";
-import { USERS_UPDATE_RESET } from "../constants/userConstants";
+import { USER_UPDATE_RESET } from "../constants/userConstants";
 
 const UserEditScreen = ({ match, history }) => {
   const userId = match.params.id;
@@ -29,12 +29,12 @@ const UserEditScreen = ({ match, history }) => {
 
   useEffect(() => {
     if (successUpdate) {
-      dispatch({ type: USERS_UPDATE_RESET });
+      dispatch({ type: USER_UPDATE_RESET });
       history.push("/admin/userlist");
     } else {
-      if (user && (!user.name || user._id !== userId)) {
+      if (!user.name || user._id !== userId) {
         dispatch(getUserDetails(userId));
-      } else if (user) {
+      } else {
         setName(user.name);
         setEmail(user.email);
         setIsAdmin(user.isAdmin);

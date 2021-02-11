@@ -5,6 +5,7 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 import SearchBox from "./SearchBox";
+import "../styles/pageStyles/productScreen.css"
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const Header = () => {
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Shop</Navbar.Brand>
+            <Navbar.Brand><h5>E-Commerce</h5> </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

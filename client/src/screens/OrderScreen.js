@@ -6,6 +6,8 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import '../styles/pageStyles/productScreen.css'
+
 import {
   getOrderDetails,
   payOrder,
@@ -97,7 +99,7 @@ const OrderScreen = ({ match, history }) => {
               <strong>Name: </strong> {order.user.name}
               <br />
               <strong>Email: </strong>{" "}
-              <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
+              <a className="link-color" href={`mailto:${order.user.email}`}>{order.user.email}</a>
               <p>
                 <strong>Address: </strong>
                 {order.shippingAddress.address}, {order.shippingAddress.city},{" "}
@@ -143,7 +145,7 @@ const OrderScreen = ({ match, history }) => {
                             />
                           </Col>
                           <Col>
-                            <Link to={`/product/${item.product}`}>
+                            <Link className="link-color" to={`/product/${item.product}`}>
                               {item.name}
                             </Link>
                           </Col>

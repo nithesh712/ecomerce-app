@@ -67,7 +67,7 @@ const ProductScreen = ({ match, history }) => {
   };
 
   const commentHandler = () => {
-    history.push(`/product${match.params.id}/reviews`);
+    history.push(`/product/${match.params.id}/reviews`);
   };
 
   return (
@@ -215,9 +215,7 @@ const ProductScreen = ({ match, history }) => {
                 )}
               </ListGroup>
               <h2>Reviews</h2>
-              {product.reviews.length === 0 && (
-                <Message variant="info">No Reviews</Message>
-              )}
+              {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
                 {product.reviews.slice(0, 2).map((review) => (
                   <ListGroup.Item key={review._id}>
@@ -228,9 +226,11 @@ const ProductScreen = ({ match, history }) => {
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-              <Button className="btn my-3 rounded" onClick={commentHandler}>
-                Load More
-              </Button>
+              {product.reviews.length > 2 && (
+                <Button className="btn my-3 rounded" onClick={commentHandler}>
+                  Load More
+                </Button>
+              )}
             </Col>
           </Row>
         </>

@@ -1,20 +1,20 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
 
-import path from "path";
-import express from "express";
-import connectDB from "./config/db.js";
-import morgan from "morgan";
-import { notFound, errorHandler } from "./middleware/error.js";
+import path from 'path';
+import express from 'express';
+import connectDB from './config/db.js';
+import morgan from 'morgan';
+import { notFound, errorHandler } from './middleware/error.js';
 
-import productRoutes from "./routes/productRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
-import orderRoutes from "./routes/orderRoutes.js";
-import uploadRoutes from "./routes/uploadRoutes.js";
+import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 const app = express();
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
 }
 
 connectDB();
@@ -22,20 +22,30 @@ connectDB();
 app.use(express.json());
 
 // Routes
-app.get("/", (req, res) => {
-  res.send("Hello");
-});
-app.use("/api/products", productRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/orders", orderRoutes);
-app.use("/api/upload", uploadRoutes);
 
-app.get("/api/config/paypal", (req, res) =>
+app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/upload', uploadRoutes);
+
+app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 );
 
 const __dirname = path.resolve();
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/client/build')));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  );
+} else {
+  app.get('/', (req, res) => {
+    res.send('Hello');
+  });
+}
 
 // Error Handling
 app.use(notFound);

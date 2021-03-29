@@ -1,12 +1,12 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 dotenv.config();
-import users from "./data/users.js";
-import products from "./data/products.js";
-import User from "./models/UserModel.js";
-import Product from "./models/ProductModel.js";
-import Order from "./models/OrderModel.js";
-import connectDB from "./config/db.js";
+// import users from "./data/users.js";
+import products from './data/products.js';
+import User from './models/UserModel.js';
+import Product from './models/ProductModel.js';
+import Order from './models/OrderModel.js';
+import connectDB from './config/db.js';
 
 connectDB();
 
@@ -16,7 +16,7 @@ const importData = async () => {
     await Product.deleteMany();
     await User.deleteMany();
 
-    const createdUser = await User.insertMany(users);
+    // const createdUser = await User.insertMany(users);
     const adminUser = createdUser[0]._id;
 
     const sampleProducts = products.map((product) => {
@@ -26,7 +26,7 @@ const importData = async () => {
       };
     });
     await Product.insertMany(sampleProducts);
-    console.log("DATA IMPORTED");
+    console.log('DATA IMPORTED');
     process.exit();
   } catch (error) {
     console.error(error.message);
@@ -39,7 +39,7 @@ const destroyData = async () => {
     await Product.deleteMany();
     await User.deleteMany();
 
-    console.log("DATA DELETED");
+    console.log('DATA DELETED');
     process.exit();
   } catch (error) {
     console.error(error.message);
@@ -47,7 +47,7 @@ const destroyData = async () => {
   }
 };
 
-if (process.argv[2] === "-d") {
+if (process.argv[2] === '-d') {
   destroyData();
 } else {
   importData();
